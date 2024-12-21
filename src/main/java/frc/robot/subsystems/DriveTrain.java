@@ -14,21 +14,27 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import com.kauailabs.navx.frc.AHRS; 
+//Link to libary for navx board or in other words the thing we use for a gyroscope thats in the center of the robot 
+//Link -> https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/java/
 
 public class DriveTrain extends SubsystemBase {
   
-  
+  //Used from navx board (gyroscope that is currently on the center of the robot)
+  //Roll, Pitch, Yaw
+  private final double xAxis, yAxis, zAxis; 
+  private AHRS gyro;
+
   // Essential attributes for swerve
   SwerveDriveKinematics kinematics;
   SwerveDriveOdometry   odometry;
-  // !!! The following objects are psuedo, for this to work they need to exist
-  Gyroscope             gyro;
+  // !!! The following objects are psuedo, for this to work they need to exist             
   SwerveModule[]        swerveModules;
 
 
-  public DataTrain() {
+  public DriveTrain() {
     // !!! Swerve modules need to be setup
     swerveModules = new SwerveModule[4];
 
@@ -46,12 +52,13 @@ public class DriveTrain extends SubsystemBase {
     );
 
     // Gyroscope initilization
-    gyro = new Gyroscope();
+    gyro = new AHRS();
+    gyro.enableLogging(true);
 
     // Initilizes with the current angle, and all the positional values are assumed to start here (x=0, r=0, heading=0)
     odometry = new SwerveDriveOdometry(
             kinematics,
-            gyro.getAngle(), // Grab the angle as a Rotation2d
+            Rotation2d.fromDegrees(gyro.getAngle()), // Grab the angle as a Rotation2d
             new SwerveModulePosition[]{new SwerveModulePosition(), new SwerveModulePosition(), new SwerveModulePosition(), new SwerveModulePosition},
             // Front-Left, Front-Right, Back-Left, Back-Right -> Keep in same order as kinematic setup
             new Pose2d(0,0,new Rotation2d()) // x=0, y=0, heading=0
@@ -76,7 +83,7 @@ public class DriveTrain extends SubsystemBase {
   public void periodic()
   {
       // Update the odometry every run.
-      odometry.update(gyro.getAngle(),  getCurrentSwerveModulePositions());
+      odometry.update(Rotation2d.fromDegrees(gyro.getAngle()),  getCurrentSwerveModulePositions());
   }
 }
 
