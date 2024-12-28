@@ -55,7 +55,7 @@ public class SwerveModule {
     // seperate pids/encoders for drive/turn
     drivingPIDController = driveMotor.getPIDController();
     turningPIDController = steerMotor.getPIDController();
-    driveEncoder = driveMotor.getEncoder():
+    driveEncoder = driveMotor.getEncoder();
     steerEncoder = steerMotor.getEncoder();
 
     // set everything to factory default at start
@@ -189,7 +189,7 @@ public class DriveTrain extends SubsystemBase {
     odometry = new SwerveDriveOdometry(
             kinematics,
             Rotation2d.fromDegrees(gyro.getAngle()), // Grab the angle as a Rotation2d
-            new SwerveModulePosition[]{new SwerveModulePosition(), new SwerveModulePosition(), new SwerveModulePosition(), new SwerveModulePosition},
+            new SwerveModulePosition[]{new SwerveModulePosition(), new SwerveModulePosition(), new SwerveModulePosition(), new SwerveModulePosition()},
             // Front-Left, Front-Right, Back-Left, Back-Right -> Keep in same order as kinematic setup
             new Pose2d(0,0,new Rotation2d()) // x=0, y=0, heading=0
         );
