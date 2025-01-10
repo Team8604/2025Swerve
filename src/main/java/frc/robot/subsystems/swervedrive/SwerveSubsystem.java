@@ -6,6 +6,9 @@ package frc.robot.subsystems.swervedrive;
 
 import static edu.wpi.first.units.Units.Meter;
 
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.commands.PathfindingCommand;
@@ -126,6 +129,11 @@ public class SwerveSubsystem extends SubsystemBase
       swerveDrive.stopOdometryThread();
     }
     setupPathPlanner();
+
+    for (int i = 0; i < 4; i++) {
+      TalonFX talon = (TalonFX)swerveDrive.getModules()[i].getAngleMotor().getMotor();
+      talon.getConfigurator().apply(new MotionMagicConfigs().withMotionMagicCruiseVelocity(500).withMotionMagicAcceleration(500));
+    }
   }
 
   /**
