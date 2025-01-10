@@ -58,9 +58,9 @@ public class RobotContainer
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
    */
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                                                                () -> driverXbox.getLeftY() * -1,
-                                                                () -> driverXbox.getLeftX() * -1)
-                                                            .withControllerRotationAxis(driverXbox::getRightX)
+                                                                () -> driverXbox.getLeftY(),
+                                                                () -> driverXbox.getLeftX())
+                                                            .withControllerRotationAxis(() -> driverXbox.getRightX())
                                                             .deadband(OperatorConstants.DEADBAND)
                                                             .scaleTranslation(0.8)
                                                             .allianceRelativeControl(true);
@@ -132,9 +132,18 @@ public class RobotContainer
   private void configureBindings()
   {
     // (Condition) ? Return-On-True : Return-on-False
+
+    // The below code will control the robot to a heading while driving.
+
+    // drivebase.setDefaultCommand(!RobotBase.isSimulation() ?
+    //                             driveFieldOrientedDirectAngle :
+    //                             driveFieldOrientedDirectAngleSim);
+
+    // The below code will control the robot's rotation based on an angular velocity
+
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ?
-                                driveFieldOrientedDirectAngle :
-                                driveFieldOrientedDirectAngleSim);
+                                driveFieldOrientedAnglularVelocity :
+                                driveFieldOrientedAnglularVelocity);
 
     if (Robot.isSimulation())
     {
