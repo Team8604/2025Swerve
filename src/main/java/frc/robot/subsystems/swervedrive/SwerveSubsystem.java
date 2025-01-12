@@ -130,6 +130,8 @@ public class SwerveSubsystem extends SubsystemBase
     }
     setupPathPlanner();
 
+
+    //added to overwrite the limits on the steering motors that YAGSL preset
     for (int i = 0; i < 4; i++) {
       TalonFX talon = (TalonFX)swerveDrive.getModules()[i].getAngleMotor().getMotor();
       talon.getConfigurator().apply(new MotionMagicConfigs().withMotionMagicCruiseVelocity(500).withMotionMagicAcceleration(500));
