@@ -321,13 +321,13 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Get the path follower with events.
    *
-   * @param pathName PathPlanner path name.
+   * @param autoName PathPlanner auto name.
    * @return {@link AutoBuilder#followPath(PathPlannerPath)} path command.
    */
-  public Command getAutonomousCommand(String pathName)
+  public Command getAutonomousCommand(String autoName)
   {
     // Create a path following command using AutoBuilder. This will also trigger event markers.
-    return new PathPlannerAuto(pathName);
+    return new PathPlannerAuto(autoName);
   }
 
   /**
