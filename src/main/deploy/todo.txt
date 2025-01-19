@@ -1,0 +1,4 @@
+1. test current limit and other limits
+2. add odometry to advantagescope
+3. adjust autonomous PIDs
+4. TBD
