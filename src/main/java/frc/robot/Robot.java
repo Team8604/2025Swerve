@@ -28,9 +28,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    leftMotor.set(logitechController.getRawAxis(1));
-    rightMotor.set(-logitechController.getRawAxis(5));
-    topMotor.set(logitechController.getRawAxis(2));
   }
 
   @Override
@@ -43,7 +40,11 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    leftMotor.set(logitechController.getRawAxis(2) / 100);
+    rightMotor.set(logitechController.getRawAxis(5) / 100);
+    topMotor.set(logitechController.getRawAxis(3) / 100);
+  }
 
   @Override
   public void disabledInit() {}
