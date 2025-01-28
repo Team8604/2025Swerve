@@ -16,9 +16,9 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
  */
 public class Robot extends TimedRobot {
   Joystick logitechController = new Joystick(1);;
-  SparkMax leftMotor = new SparkMax(1, MotorType.kBrushless);
-  SparkMax rightMotor = new SparkMax(2, MotorType.kBrushless);
-  SparkMax topMotor = new SparkMax(3, MotorType.kBrushless);
+  SparkMax leftMotor = new SparkMax(10, MotorType.kBrushless);
+  SparkMax rightMotor = new SparkMax(20, MotorType.kBrushless);
+  SparkMax topMotor = new SparkMax(30, MotorType.kBrushless);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
