@@ -15,10 +15,10 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
  * this project, you must also update the Main.java file in the project.
  */
 public class Robot extends TimedRobot {
-  Joystick logitechController = new Joystick(1);;
+  Joystick logitechController = new Joystick(0);;
   SparkMax leftMotor = new SparkMax(10, MotorType.kBrushless);
-  SparkMax rightMotor = new SparkMax(20, MotorType.kBrushless);
-  SparkMax topMotor = new SparkMax(30, MotorType.kBrushless);
+  SparkMax rightMotor = new SparkMax(30, MotorType.kBrushless);
+  SparkMax topMotor = new SparkMax(20, MotorType.kBrushless);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -41,9 +41,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    leftMotor.set(logitechController.getRawAxis(2) / 100);
-    rightMotor.set(logitechController.getRawAxis(5) / 100);
-    topMotor.set(logitechController.getRawAxis(3) / 100);
+    leftMotor.set(Math.pow(logitechController.getRawAxis(1),3));
+    rightMotor.set(Math.pow(logitechController.getRawAxis(5),3));
+    topMotor.set(Math.pow(logitechController.getRawAxis(3) - logitechController.getRawAxis(2),3));
   }
 
   @Override
