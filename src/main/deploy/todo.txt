@@ -1,4 +1,2 @@
-1. test current limit and other limits
-2. add odometry to advantagescope
-3. adjust autonomous PIDs
-4. TBD
+1. check drive PID
+2. Test drive teleop/autonomous

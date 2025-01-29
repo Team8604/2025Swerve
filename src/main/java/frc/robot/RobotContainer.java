@@ -153,6 +153,7 @@ public class RobotContainer
     //                             driveFieldOrientedDirectAngleSim);
 
     // The below code will control the robot's rotation based on an angular velocity
+    driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ?
                                 driveFieldOrientedAnglularVelocity :
