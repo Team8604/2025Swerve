@@ -64,7 +64,7 @@ public class RobotContainer
                                                                 () -> driverXbox.getLeftX())
                                                             .withControllerRotationAxis(() -> -driverXbox.getRightX())
                                                             .deadband(OperatorConstants.DEADBAND)
-                                                            .scaleTranslation(0.05)
+                                                            .scaleTranslation(0.5)
                                                             .scaleRotation(0.15)
                                                             .allianceRelativeControl(true);
 
@@ -153,6 +153,7 @@ public class RobotContainer
     //                             driveFieldOrientedDirectAngleSim);
 
     // The below code will control the robot's rotation based on an angular velocity
+    driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ?
                                 driveFieldOrientedAnglularVelocity :
@@ -199,7 +200,7 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("New Auto");
+    return drivebase.getAutonomousCommand("Test Auto");
   }
 
   public void setDriveMode()
