@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.MathUtil;
 
@@ -24,7 +25,7 @@ public class Robot extends TimedRobot {
   SparkMax rightMotor = new SparkMax(20, MotorType.kBrushless);
   SparkMax intakeMotor = new SparkMax(30, MotorType.kBrushless);
 
-  //For stopping intake motor when coral is intaked
+  // For stopping intake motor when coral is intaked
   double intakeSpeed = 0, temp;
   boolean isCoral = false;
 
@@ -41,13 +42,16 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+  }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+  }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+  }
 
   @Override
   public void teleopPeriodic() {
@@ -55,24 +59,23 @@ public class Robot extends TimedRobot {
     leftMotor.set(Math.pow(logitechController.getRawAxis(1), 3));
     rightMotor.set(MathUtil.clamp(Math.pow(logitechController.getRawAxis(5), 3), -0.1, 0.1));
 
-    //stopper for when coral inside of intake below
+    // stopper for when coral inside of intake below
     temp = MathUtil.clamp(Math.pow(logitechController.getRawAxis(3) - logitechController.getRawAxis(2), 3), -0.3, 0.3);
 
-    if (temp < 0) { 
+    if (temp < 0) {
       // would mean intake backing out
       isCoral = false;
-    } 
-    else if (isCoral || intakeMotor.getOutputCurrent() > 20) { 
+    } else if (isCoral || intakeMotor.getOutputCurrent() > 20) {
       // would mean already tripped or should based on current
       temp = 0;
       isCoral = true;
     }
 
-    //sets speed to intake motor
+    // sets speed to intake motor
     intakeSpeed = temp;
     intakeMotor.set(intakeSpeed);
 
-    //display numbers
+    // display numbers
     SmartDashboard.putNumber("Bus voltage", rightMotor.getBusVoltage());
     SmartDashboard.putNumber("Intake voltage", intakeMotor.get());
     SmartDashboard.putNumber("Intake speed", intakeSpeed);
@@ -82,20 +85,26 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
-  public void testInit() {}
+  public void testInit() {
+  }
 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 
   @Override
-  public void simulationInit() {}
+  public void simulationInit() {
+  }
 
   @Override
-  public void simulationPeriodic() {}
+  public void simulationPeriodic() {
+  }
 }
