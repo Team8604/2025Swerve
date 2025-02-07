@@ -1,6 +1,6 @@
 {
   "imu": {
-    "type": "pigeon",
+    "type": "pigeon2",
     "id": 5,
     "canbus": "roborio"
   },
