@@ -121,7 +121,7 @@ public class SwerveSubsystem extends SubsystemBase
                                                0.1); //Correct for skew that gets worse as angular velocity increases. Start with a coefficient of 0.1.
     swerveDrive.setModuleEncoderAutoSynchronize(false,
                                                 1); // Enable if you want to resynchronize your absolute encoders and motor encoders periodically when they are not moving.
-    swerveDrive.pushOffsetsToEncoders(); // Set the absolute encoder to be used over the internal encoder and push the offsets onto it. Throws warning if not possible
+    swerveDrive.useExternalFeedbackSensor(); // Set the absolute encoder to be used over the internal encoder and push the offsets onto it. Throws warning if not possible
     if (visionDriveTest)
     {
       setupPhotonVision();
@@ -418,7 +418,7 @@ public class SwerveSubsystem extends SubsystemBase
     return SwerveDriveTest.generateSysIdCommand(
         SwerveDriveTest.setDriveSysIdRoutine(
             new Config(),
-            this, swerveDrive, 12),
+            this, swerveDrive, 12, true),
         3.0, 5.0, 3.0);
   }
 
