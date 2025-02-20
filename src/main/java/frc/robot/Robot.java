@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
     leftMotor.set(Math.pow(logitechController.getRawAxis(1), 3));
-    rightMotor.set(MathUtil.clamp(Math.pow(logitechController.getRawAxis(5), 3), -0.1, 0.1));
+    rightMotor.set(MathUtil.clamp(Math.pow(logitechController.getRawAxis(5), 3), -0.2, 0.2));
 
     // stopper for when coral inside of intake below
     temp = MathUtil.clamp(Math.pow(logitechController.getRawAxis(3) - logitechController.getRawAxis(2), 3), -0.3, 0.3);
