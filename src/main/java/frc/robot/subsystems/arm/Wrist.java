@@ -1,5 +1,6 @@
 package frc.robot.subsystems.arm;
 
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -7,7 +8,6 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.WristConstants;
 import frc.robot.RobotContainer;
@@ -16,8 +16,8 @@ public class Wrist extends SubsystemBase {
     // Set up tilt and twist motors, and encoders
     private final SparkMax tiltMotor = new SparkMax(WristConstants.kTilt, MotorType.kBrushless);
     private final SparkMax twistMotor = new SparkMax(WristConstants.kTwist, MotorType.kBrushless);
-    private final DutyCycleEncoder tiltEncoder = new DutyCycleEncoder(WristConstants.kTiltEncoder);
-    private final DutyCycleEncoder twistEncoder = new DutyCycleEncoder(WristConstants.kTwistEncoder);
+    private final RelativeEncoder tiltEncoder = tiltMotor.getAlternateEncoder();
+    private final RelativeEncoder twistEncoder = twistMotor.getAlternateEncoder();
 
     private SparkMaxConfig motorConfig = new SparkMaxConfig();;
 
@@ -33,11 +33,11 @@ public class Wrist extends SubsystemBase {
     }
 
     public double getTwistEncoder() {
-        return twistEncoder.get();
+        return twistEncoder.getPosition();
     }
 
     public double getTiltEncoder() {
-        return tiltEncoder.get();
+        return tiltEncoder.getPosition();
     }
 
     public void setTiltSpeed(double speed) {
