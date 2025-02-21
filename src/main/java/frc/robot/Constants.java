@@ -32,8 +32,8 @@ public final class Constants {
     public static final int kEffector = 50;
 
     // TEMPORARY speeds
-    public static final double kMaxSpeed = 0.5;
-    public static final double kIntakeSpeed = 0.5;
+    public static final double kMaxSpeed = 0.2;
+    public static final double kIntakeSpeed = 0.3;
   }
 
   public static class WristConstants {
@@ -44,12 +44,24 @@ public final class Constants {
     public static final int kTwistEncoder = 54;
 
     // TEMPORARY speeds TEMPORARY PLACEHOLDERS
-    public static final double kMaxTwistSpeed = 0.5;
-    public static final double kMaxTiltSpeed = 0.5;
+    public static final double kMaxTwistSpeed = 0.1;
+    public static final double kMaxTiltSpeed = 0.1;
 
-    // Wrist Positions TEMPORARY PLACEHOLDERS
-    public static final double kStartingPosition = 0;
-    public static final double kCoralFirstLevelPosition = 0;
+    // Wrist Positions TEMPORARY PLACEHOLDERS figure out from encoders values
+    public static final double kMaxPositiveTwist = 90; 
+    public static final double kMaxNegativeTwist = -90; 
 
+    public static final double kMaxPositiveTilt = 90;
+    public static final double kMaxNegativeTilt = -90;
+
+
+    // Pid values
+    public static final double kTwistP = 0.1;
+    public static final double kTwistI = 0;
+    public static final double kTwistD = 0;
+
+    public static final double kTiltP = 0.1;
+    public static final double kTiltI = 0;
+    public static final double kTiltD = 0;
   }
 }

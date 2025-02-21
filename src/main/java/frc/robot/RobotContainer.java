@@ -6,10 +6,13 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RunEffector;
+import frc.robot.commands.arm.RunWrist;
 import frc.robot.subsystems.Effector;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.Wrist;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -30,8 +33,11 @@ public class RobotContainer {
   public static Arm arm = new Arm();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController = new CommandXboxController(
+  public static CommandXboxController m_operatorController = new CommandXboxController(
       OperatorConstants.kOperatorControllerPort);
+
+  //Operator buttons
+  public static Trigger operatorA = m_operatorController.a();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -39,6 +45,9 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+    // Set default commands
+    CommandScheduler.getInstance().setDefaultCommand(RobotContainer.wrist, new RunWrist());
   }
 
   /**
@@ -63,6 +72,7 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    m_operatorController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    operatorA.whileTrue(new RunEffector());
   }
 }

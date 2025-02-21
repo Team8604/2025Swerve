@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.RobotContainer;
+import frc.robot.Constants.EffectorConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
@@ -14,10 +15,10 @@ public class RunEffector extends Command {
   double effectorSpeed = 0, temp;
   boolean isCoral = false;
 
-  public RunEffector(double speed) {
+  public RunEffector() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.effector);
-    temp = speed;
+    temp = EffectorConstants.kIntakeSpeed;
   }
 
   // Called when the command is initially scheduled.

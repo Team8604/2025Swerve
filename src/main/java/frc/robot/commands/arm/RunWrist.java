@@ -2,12 +2,13 @@ package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.WristConstants;
 
 public class RunWrist extends Command {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-    public double tiltEncoderStart, twistEncoderStart;
+    public double tiltEncoderStartPos, twistEncoderStartPos, tiltTemp, twistTemp;
 
-    public RunWrist(double tiltTarget, double twistTarget) {
+    public RunWrist() {
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(RobotContainer.effector);
     }
@@ -15,20 +16,17 @@ public class RunWrist extends Command {
     @Override
     public void initialize() {
         // Set starting positions from encoders
-        tiltEncoderStart = RobotContainer.wrist.getTiltEncoder();
-        twistEncoderStart = RobotContainer.wrist.getTwistEncoder();
+        tiltEncoderStartPos = RobotContainer.wrist.getTiltEncoder();
+        twistEncoderStartPos = RobotContainer.wrist.getTwistEncoder();
     }
 
     @Override
     public void execute() {
-        // TEMPORARY
-        RobotContainer.wrist.setTiltSpeed(0);
-        RobotContainer.wrist.setTwistSpeed(0);
-    }
+        // Used to set twist speed to 0 so that it doesn't go past 90 degrees
+        twistTemp = RobotContainer.m_operatorController.getRawAxis(1);
+        tiltTemp = RobotContainer.m_operatorController.getRawAxis(5);
 
-    @Override
-    public boolean isFinished() {
-        // TEMPORARY
-        return false;
+        RobotContainer.wrist.setTiltSpeed(twistTemp * WristConstants.kMaxTwistSpeed);
+        RobotContainer.wrist.setTwistSpeed(tiltTemp * WristConstants.kMaxTiltSpeed);
     }
 }
