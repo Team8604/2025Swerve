@@ -28,7 +28,7 @@ public class Arm extends SubsystemBase {
         tiltSlaveMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         extendMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
-        tiltSlaveMotor.follow(tiltMasterMotor, true);
+        tiltSlaveMotor.follow(tiltMasterMotor, true); //FIX error later
 
         // Zero out encoder to start
         tiltEncoder.setPosition(0);
