@@ -67,7 +67,8 @@ public final class Constants {
     public static final int kTiltSlave = 54;
     public static final int kExtend = 55;
 
-    public static final double TiltSpeed = 0.1;
-    public static final double kmaxTiltSpeed = 0.1;
+    public static final double kMaxTiltSpeed = 0.1;
+    public static final double kMaxTwistSpeed = 0.1;
+
   }
 }

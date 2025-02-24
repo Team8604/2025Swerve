@@ -10,7 +10,6 @@ import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
-import frc.robot.Constants.WristConstants;
 
 public class Arm extends SubsystemBase {
     // Set up tilt and twist motors, and encoders
@@ -20,15 +19,17 @@ public class Arm extends SubsystemBase {
     private final RelativeEncoder  tiltEncoder = tiltMasterMotor.getExternalEncoder();
 
     private SparkFlexConfig motorConfig = new SparkFlexConfig();
-
+    private SparkFlexConfig slaveMotorConfig = new SparkFlexConfig();
 
     public Arm() {
+        // Set yp slave config
+        slaveMotorConfig.follow(ArmConstants.kTiltMaster);
+
         // Configure motors
         tiltMasterMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
-        tiltSlaveMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+        tiltSlaveMotor.configure(slaveMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         extendMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
-        tiltSlaveMotor.follow(tiltMasterMotor, true); //FIX error later
 
         // Zero out encoder to start
         tiltEncoder.setPosition(0);
@@ -39,10 +40,10 @@ public class Arm extends SubsystemBase {
     }
 
     public void setTiltSpeed(double speed) {
-        tiltMasterMotor.set(ArmConstants.kmaxTiltSpeed * MathUtil.clamp(speed, -1, 1));
+        tiltMasterMotor.set(ArmConstants.kMaxTiltSpeed * MathUtil.clamp(speed, -1, 1));
     }
 
     public void setTwistSpeed(double speed) {
-        extendMotor.set(ArmConstants.kmaxTiltSpeed * MathUtil.clamp(speed, -1, 1));
+        extendMotor.set(ArmConstants.kMaxTwistSpeed * MathUtil.clamp(speed, -1, 1));
     }
 }
