@@ -40,22 +40,18 @@ public final class Constants {
     // TEMPORARY CAN IDs for
     public static final int kTwist = 51;
     public static final int kTilt = 52;
-    public static final int kTiltEncoder = 53;
-    public static final int kTwistEncoder = 54;
 
     // TEMPORARY speeds TEMPORARY PLACEHOLDERS
     public static final double kMaxTwistSpeed = 0.1;
     public static final double kMaxTiltSpeed = 0.1;
 
     // Wrist Positions TEMPORARY PLACEHOLDERS figure out from encoders values
-    public static final double kMaxPositiveTwist = 90; 
-    public static final double kMaxNegativeTwist = -90; 
+    public static final double kMaxPositiveTwist = 90;
+    public static final double kMaxNegativeTwist = -90;
 
     public static final double kMaxPositiveTilt = 90;
     public static final double kMaxNegativeTilt = -90;
 
-
-    // Pid values
     public static final double kTwistP = 0.1;
     public static final double kTwistI = 0;
     public static final double kTwistD = 0;
@@ -63,5 +59,15 @@ public final class Constants {
     public static final double kTiltP = 0.1;
     public static final double kTiltI = 0;
     public static final double kTiltD = 0;
+  }
+
+  public static class ArmConstants {
+    // TEMPORARY CAN IDs for
+    public static final int kTiltMaster = 53;
+    public static final int kTiltSlave = 54;
+    public static final int kExtend = 55;
+
+    public static final double TiltSpeed = 0.1;
+    public static final double kmaxTiltSpeed = 0.1;
   }
 }

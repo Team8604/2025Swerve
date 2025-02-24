@@ -41,7 +41,6 @@ public class Wrist extends SubsystemBase {
     }
 
     public void setTiltSpeed(double speed) {
-
         boolean positiveTilt = speed > 0 && tiltEncoderStartPos + getTiltEncoder() > WristConstants.kMaxPositiveTilt;
         boolean negativeTilt = speed < 0 && tiltEncoderStartPos - getTiltEncoder() < WristConstants.kMaxNegativeTilt;
 
@@ -53,7 +52,6 @@ public class Wrist extends SubsystemBase {
     }
 
     public void setTwistSpeed(double speed) {
-
         boolean positiveTwist = speed > 0 && twistEncoderStartPos + getTwistEncoder() > WristConstants.kMaxPositiveTwist;
         boolean negativeTwist = speed < 0 && twistEncoderStartPos - getTwistEncoder() < WristConstants.kMaxNegativeTwist;
 
