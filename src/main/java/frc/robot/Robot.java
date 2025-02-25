@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Joystick;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -24,6 +25,9 @@ public class Robot extends TimedRobot {
   SparkMax leftMotor = new SparkMax(10, MotorType.kBrushless);
   SparkMax rightMotor = new SparkMax(20, MotorType.kBrushless);
   SparkMax intakeMotor = new SparkMax(30, MotorType.kBrushless);
+
+  // set up analog Potentiometer
+  AnalogPotentiometer potentiometer = new AnalogPotentiometer(0);
 
   // For stopping intake motor when coral is intaked
   double intakeSpeed = 0, temp;
@@ -81,6 +85,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Intake speed", intakeSpeed);
     SmartDashboard.putNumber("Intake amps", intakeMotor.getOutputCurrent());
     SmartDashboard.putBoolean("isCoral", isCoral);
+    SmartDashboard.putNumber("potentiometer", potentiometer.get());
 
   }
 
@@ -96,15 +101,4 @@ public class Robot extends TimedRobot {
   public void testInit() {
   }
 
-  @Override
-  public void testPeriodic() {
-  }
-
-  @Override
-  public void simulationInit() {
-  }
-
-  @Override
-  public void simulationPeriodic() {
-  }
 }
