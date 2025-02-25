@@ -10,7 +10,6 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.WristConstants;
-import frc.robot.RobotContainer;
 
 public class Wrist extends SubsystemBase {
     // Set up tilt and twist motors, and encoders
@@ -58,6 +57,5 @@ public class Wrist extends SubsystemBase {
         } else {
             twistMotor.set(0);
         }
-
     }
 }

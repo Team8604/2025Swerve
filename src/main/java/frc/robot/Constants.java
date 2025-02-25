@@ -52,6 +52,7 @@ public final class Constants {
     public static final double kMaxPositiveTilt = 90;
     public static final double kMaxNegativeTilt = -90;
 
+    // Wrist Pid Values
     public static final double kTwistP = 0.1;
     public static final double kTwistI = 0;
     public static final double kTwistD = 0;
@@ -77,5 +78,14 @@ public final class Constants {
     public static final double kMaxNegativeTilt = -90;
 
     public static final double kMaxExtend = 3;
+
+    // Arm Pid Values
+    public static final double kExtendP = 0.1;
+    public static final double kExtendI = 0;
+    public static final double kExtendD = 0;
+
+    public static final double kTiltP = 0.1;
+    public static final double kTiltI = 0;
+    public static final double kTiltD = 0;
   }
 }
