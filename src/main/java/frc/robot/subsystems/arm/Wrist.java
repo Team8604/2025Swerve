@@ -21,15 +21,13 @@ public class Wrist extends SubsystemBase {
 
     private SparkMaxConfig motorConfig = new SparkMaxConfig();;
 
-    private double tiltEncoderStartPos, twistEncoderStartPos;
-
     public Wrist() {
         tiltMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         twistMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     
-        // Set starting positions from encoders
-        tiltEncoderStartPos = RobotContainer.wrist.getTiltEncoder();
-        twistEncoderStartPos = RobotContainer.wrist.getTwistEncoder();
+        // Zero encoders
+        tiltEncoder.setPosition(0);
+        twistEncoder.setPosition(0);
     }
 
     public double getTwistEncoder() {
@@ -41,8 +39,8 @@ public class Wrist extends SubsystemBase {
     }
 
     public void setTiltSpeed(double speed) {
-        boolean positiveTilt = speed > 0 && tiltEncoderStartPos + getTiltEncoder() > WristConstants.kMaxPositiveTilt;
-        boolean negativeTilt = speed < 0 && tiltEncoderStartPos - getTiltEncoder() < WristConstants.kMaxNegativeTilt;
+        boolean positiveTilt = speed > 0 && getTiltEncoder() > WristConstants.kMaxPositiveTilt;
+        boolean negativeTilt = speed < 0 && getTiltEncoder() < WristConstants.kMaxNegativeTilt;
 
         if (positiveTilt && negativeTilt) {
             tiltMotor.set(WristConstants.kMaxTiltSpeed * MathUtil.clamp(speed, -1, 1));
@@ -52,8 +50,8 @@ public class Wrist extends SubsystemBase {
     }
 
     public void setTwistSpeed(double speed) {
-        boolean positiveTwist = speed > 0 && twistEncoderStartPos + getTwistEncoder() > WristConstants.kMaxPositiveTwist;
-        boolean negativeTwist = speed < 0 && twistEncoderStartPos - getTwistEncoder() < WristConstants.kMaxNegativeTwist;
+        boolean positiveTwist = speed > 0 && getTwistEncoder() > WristConstants.kMaxPositiveTwist;
+        boolean negativeTwist = speed < 0 && getTwistEncoder() < WristConstants.kMaxNegativeTwist;
 
         if (positiveTwist && negativeTwist) { 
             twistMotor.set(WristConstants.kMaxTwistSpeed * MathUtil.clamp(speed, -1, 1));

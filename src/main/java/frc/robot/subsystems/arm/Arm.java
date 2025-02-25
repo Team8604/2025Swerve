@@ -8,8 +8,10 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkFlex;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.WristConstants;
 
 public class Arm extends SubsystemBase {
     // Set up tilt and twist motors, and encoders
@@ -17,9 +19,12 @@ public class Arm extends SubsystemBase {
     private final SparkFlex tiltSlaveMotor = new SparkFlex(ArmConstants.kTiltSlave, MotorType.kBrushless);
     private final SparkFlex extendMotor = new SparkFlex(ArmConstants.kExtend, MotorType.kBrushless);
     private final RelativeEncoder  tiltEncoder = tiltMasterMotor.getExternalEncoder();
+    private final AnalogPotentiometer potentiometer = new AnalogPotentiometer(ArmConstants.kPotentiometerPort);
 
     private SparkFlexConfig motorConfig = new SparkFlexConfig();
     private SparkFlexConfig slaveMotorConfig = new SparkFlexConfig();
+
+    private double extendStartingPos;
 
     public Arm() {
         // Set yp slave config
@@ -30,20 +35,37 @@ public class Arm extends SubsystemBase {
         tiltSlaveMotor.configure(slaveMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
         extendMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
-
         // Zero out encoder to start
         tiltEncoder.setPosition(0);
+
+        extendStartingPos = getExtendValue();
     }
 
     public double getTiltEncoder() {
         return tiltEncoder.getPosition();
     }
 
-    public void setTiltSpeed(double speed) {
-        tiltMasterMotor.set(ArmConstants.kMaxTiltSpeed * MathUtil.clamp(speed, -1, 1));
+    public double getExtendValue() {
+        return potentiometer.get();
     }
 
-    public void setTwistSpeed(double speed) {
-        extendMotor.set(ArmConstants.kMaxTwistSpeed * MathUtil.clamp(speed, -1, 1));
+    public void setTiltSpeed(double speed) {
+        boolean positiveTilt = speed > 0 && getTiltEncoder() > ArmConstants.kMaxPositiveTilt;
+        boolean negativeTilt = speed < 0 && getTiltEncoder() < ArmConstants.kMaxNegativeTilt;
+
+        if (positiveTilt && negativeTilt) {
+        tiltMasterMotor.set(ArmConstants.kMaxTiltSpeed * MathUtil.clamp(speed, -1, 1));
+        } else {
+            tiltMasterMotor.set(0);
+
+        }
+    }
+
+    public void setExtendSpeed(double speed) {
+        if ((speed > 0 && getExtendValue() < ArmConstants.kMaxExtend) || (speed < 0 && getExtendValue() > extendStartingPos)) {
+            extendMotor.set(ArmConstants.kMaxExtendSpeed * MathUtil.clamp(speed, -1, 1));
+        } else {
+            extendMotor.set(0);
+        }
     }
 }

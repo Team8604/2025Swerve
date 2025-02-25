@@ -68,7 +68,14 @@ public final class Constants {
     public static final int kExtend = 55;
 
     public static final double kMaxTiltSpeed = 0.1;
-    public static final double kMaxTwistSpeed = 0.1;
+    public static final double kMaxExtendSpeed = 0.1;
+    public static final int kPotentiometerPort = 0;
 
+
+    // Placeholders (again)
+    public static final double kMaxPositiveTilt = 90;
+    public static final double kMaxNegativeTilt = -90;
+
+    public static final double kMaxExtend = 3;
   }
 }
