@@ -67,4 +67,12 @@ public class Arm extends SubsystemBase {
             extendMotor.set(0);
         }
     }
+
+    // Returns the maximum inches allowed for the length of the arm from 
+    // the base of the gearbox to the edge of the effector
+    public double getMaxDistance(){
+        // angle = a (getTiltEncoder()) / h (?)
+        // h = a / angle
+        return ArmConstants.kMaxDistanceFromFrame / (getTiltEncoder() / 360);
+    }
 }

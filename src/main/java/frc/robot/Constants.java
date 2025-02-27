@@ -67,17 +67,7 @@ public final class Constants {
     public static final int kTiltMaster = 53;
     public static final int kTiltSlave = 54;
     public static final int kExtend = 55;
-
-    public static final double kMaxTiltSpeed = 0.1;
-    public static final double kMaxExtendSpeed = 0.1;
     public static final int kPotentiometerPort = 0;
-
-
-    // Placeholders (again)
-    public static final double kMaxPositiveTilt = 90;
-    public static final double kMaxNegativeTilt = -90;
-
-    public static final double kMaxExtend = 3;
 
     // Arm Pid Values
     public static final double kExtendP = 0.1;
@@ -87,5 +77,19 @@ public final class Constants {
     public static final double kTiltP = 0.1;
     public static final double kTiltI = 0;
     public static final double kTiltD = 0;
+
+    // Arm Restrainghts ------------------------------
+    public static final double kMaxTiltSpeed = 0.1;
+    public static final double kMaxExtendSpeed = 0.1;
+    
+    // Placeholders (again)
+    public static final double kMaxPositiveTilt = 90;
+    public static final double kMaxNegativeTilt = -90;
+
+    // From 
+    public static final double kMaxExtend = 3;
+
+    public static final int kMaxDistanceFromFrame = 18; // in inches
+    
   }
 }
