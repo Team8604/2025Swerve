@@ -2,13 +2,14 @@ package frc.robot.subsystems.arm;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkFlexConfig;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkFlex;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 
@@ -17,7 +18,9 @@ public class Arm extends SubsystemBase {
     private final SparkFlex tiltMasterMotor = new SparkFlex(ArmConstants.kTiltMaster, MotorType.kBrushless);
     private final SparkFlex tiltSlaveMotor = new SparkFlex(ArmConstants.kTiltSlave, MotorType.kBrushless);
     private final SparkFlex extendMotor = new SparkFlex(ArmConstants.kExtend, MotorType.kBrushless);
-    private final RelativeEncoder  tiltEncoder = tiltMasterMotor.getExternalEncoder();
+    //private final RelativeEncoder  tiltEncoder = tiltMasterMotor.getExternalEncoder();
+    private final DutyCycleEncoder tiltEncoder = new DutyCycleEncoder(ArmConstants.kTiltEncoderPort);
+    
     private final AnalogPotentiometer potentiometer = new AnalogPotentiometer(ArmConstants.kPotentiometerPort);
 
     private SparkFlexConfig motorConfig = new SparkFlexConfig();
@@ -35,13 +38,13 @@ public class Arm extends SubsystemBase {
         extendMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
         // Zero out encoder to start
-        tiltEncoder.setPosition(0);
+        //tiltEncoder.set(0);
 
         extendStartingPos = getExtendValue();
     }
 
     public double getTiltEncoder() {
-        return tiltEncoder.getPosition();
+        return tiltEncoder.get() * 360;
     }
 
     public double getExtendValue() {
@@ -68,11 +71,13 @@ public class Arm extends SubsystemBase {
         }
     }
 
-    // Returns the maximum inches allowed for the length of the arm from 
-    // the base of the gearbox to the edge of the effector
+    // Returns the maximum distance before extension limit from the arm pivot to the edge of the effector
     public double getMaxDistance(){
         // angle = a (getTiltEncoder()) / h (?)
         // h = a / angle
         return ArmConstants.kMaxDistanceFromFrame / (getTiltEncoder() / 360);
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("tilt Encoder", getTiltEncoder());
     }
 }

@@ -52,6 +52,25 @@ public final class Constants {
     public static final double kMaxPositiveTilt = 90;
     public static final double kMaxNegativeTilt = -90;
 
+    // Wrist positions
+    public static final double kTiltStartingPos = 0;
+    public static final double kRotateStartingPos = 0;
+
+    // Coral scoring positions 
+    public static final double kTiltTrofPos = 0;
+    public static final double kRotateTrofPos = 0;
+    public static final double kTiltL1Pos = 0;
+    public static final double kRotateL1Pos = 0;
+    public static final double kTiltL2Pos = 0;
+    public static final double kRotateL2Pos = 0;
+    public static final double kTiltL3Pos = 0;
+    public static final double kRotateL3Pos = 0;
+
+    // Pickup positions
+    public static final double kTiltPickupPos = 0;
+    public static final double kRotatePickupPos = 0;
+
+
     // Wrist Pid Values
     public static final double kTwistP = 0.1;
     public static final double kTwistI = 0;
@@ -63,11 +82,14 @@ public final class Constants {
   }
 
   public static class ArmConstants {
-    // TEMPORARY CAN IDs for
+    // TEMPORARY CAN IDs for motors
     public static final int kTiltMaster = 53;
     public static final int kTiltSlave = 54;
     public static final int kExtend = 55;
-    public static final int kPotentiometerPort = 0;
+
+    // Ports on RobioRio
+    public static final int kTiltEncoderPort = 0; 
+    public static final int kPotentiometerPort = 1;
 
     // Arm Pid Values
     public static final double kExtendP = 0.1;
@@ -78,18 +100,36 @@ public final class Constants {
     public static final double kTiltI = 0;
     public static final double kTiltD = 0;
 
-    // Arm Restrainghts ------------------------------
+    // Arm Restrainghts 
     public static final double kMaxTiltSpeed = 0.1;
     public static final double kMaxExtendSpeed = 0.1;
     
     // Placeholders (again)
     public static final double kMaxPositiveTilt = 90;
-    public static final double kMaxNegativeTilt = -90;
+    public static final double kMaxNegativeTilt = 0;
 
-    // From 
-    public static final double kMaxExtend = 3;
-
-    public static final int kMaxDistanceFromFrame = 18; // in inches
+    public static final double kMaxExtend = 3; // Value on potentionometer
     
+    // Arm positions
+    public static final double kTiltStartingPos = 0;
+    public static final double kExtendStartingPos = 0;
+
+    // Coral scoring positions 
+    public static final double kTiltTrofPos = 0;
+    public static final double kExtendTrofPos = 0;
+    public static final double kTiltL1Pos = 0;
+    public static final double kExtendL1Pos = 0;
+    public static final double kTiltL2Pos = 0;
+    public static final double kExtendL2Pos = 0;
+    public static final double kTiltL3Pos = 0;
+    public static final double kExtendL3Pos = 0;
+
+    // Pickup positions
+    public static final double kTiltPickupPos = 0;
+    public static final double kExtendPickupPos = 0;
+
+
+    public static final double kMaxDistFromPivotToFront = 20.75; // distance from pivot to extension limit in inches
+    public static final double kMaxDistFromPivotToRear = 27.25 + 18; // distance from pivot to extension limit of the other side
   }
 }
