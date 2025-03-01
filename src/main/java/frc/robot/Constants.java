@@ -128,6 +128,9 @@ public final class Constants {
     public static final double kTiltPickupPos = 0;
     public static final double kExtendPickupPos = 0;
 
+    // Tilt straight up posiion used for calculating max extensions
+    public static final double kTiltUpPos = 0;
+    public static final double kTiltUpBuffer = 5; // Degres on either side of kTiltUpPos where arm has no extension limit
 
     public static final double kMaxDistFromPivotToFront = 20.75; // distance from pivot to extension limit in inches
     public static final double kMaxDistFromPivotToRear = 27.25 + 18; // distance from pivot to extension limit of the other side

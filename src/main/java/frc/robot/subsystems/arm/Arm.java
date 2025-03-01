@@ -73,11 +73,25 @@ public class Arm extends SubsystemBase {
 
     // Returns the maximum distance before extension limit from the arm pivot to the edge of the effector
     public double getMaxDistance(){
-        // angle = a (getTiltEncoder()) / h (?)
-        // h = a / angle
-        return ArmConstants.kMaxDistanceFromFrame / (getTiltEncoder() / 360);
+        double plusBuffer = ArmConstants.kTiltUpPos + ArmConstants.kTiltUpBuffer;
+        double minusBuffer = ArmConstants.kTiltUpPos - ArmConstants.kTiltUpBuffer;
+        double tiltEncoderVal = getTiltEncoder();
+
+        if (tiltEncoderVal > plusBuffer){
+            // arm would be angled fowards
+            return ArmConstants.kMaxDistFromPivotToFront / Math.cos(tiltEncoderVal);
+
+        } else if (tiltEncoderVal < minusBuffer) {
+            // arm would be angled backwards 
+            return ArmConstants.kMaxDistFromPivotToRear / Math.cos(tiltEncoderVal);
+
+        }
+        return 0; // Figure out this return - something is screwed up if it gets here
+    }
+
     @Override
     public void periodic(){
         SmartDashboard.putNumber("tilt Encoder", getTiltEncoder());
+        SmartDashboard.putNumber("Max Distance", getMaxDistance());
     }
 }
