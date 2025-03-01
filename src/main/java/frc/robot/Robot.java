@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    tiltMasterMotor.set(logitechController.getRawAxis(1) * 0.1);
+    tiltMasterMotor.set(logitechController.getRawAxis(1) * 0.18);
 
 
     //leftMotor.set(Math.pow(logitechController.getRawAxis(1), 3));
@@ -107,6 +107,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("isCoral", isCoral);
     SmartDashboard.putNumber("potentiometer", potentiometer.get());
 
+    SmartDashboard.putNumber("Master Motor Speed", tiltMasterMotor.get());
+    SmartDashboard.putNumber("Controller number", logitechController.getRawAxis(1) * 0.18);
   }
 
   @Override
