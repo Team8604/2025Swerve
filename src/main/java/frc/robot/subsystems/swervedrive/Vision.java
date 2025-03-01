@@ -340,8 +340,8 @@ public class Vision
     /**
      * Back Left Camera
      */
-    BACK_LEFT("Back Left",
-             new Rotation3d(0, Units.degreesToRadians(30), Units.degreesToRadians(148)),
+    BACK_LEFT("Back_Left",
+             new Rotation3d(0, Units.degreesToRadians(-30), Units.degreesToRadians(148)),
              new Translation3d(Units.inchesToMeters(-12.285),
                                Units.inchesToMeters(12.319),
                                Units.inchesToMeters(6.6845)),
@@ -349,8 +349,8 @@ public class Vision
     /**
      * Back Right Camera
      */
-    BACK_RIGHT("Back Right",
-              new Rotation3d(0, Units.degreesToRadians(30), Units.degreesToRadians(-148)),
+    BACK_RIGHT("Back_Right",
+              new Rotation3d(0, Units.degreesToRadians(-30), Units.degreesToRadians(-148)),
               new Translation3d(Units.inchesToMeters(-12.285),
                                 Units.inchesToMeters(-12.319),
                                 Units.inchesToMeters(6.6845)),
@@ -358,8 +358,8 @@ public class Vision
     /**
      * Front Left Camera
      */
-    FRONT_LEFT("Front Left",
-               new Rotation3d(0, Units.degreesToRadians(18), Units.degreesToRadians(-30)),
+    FRONT_LEFT("Front_Left",
+               new Rotation3d(0, Units.degreesToRadians(-18), Units.degreesToRadians(-30)),
                new Translation3d(Units.inchesToMeters(13.021),
                                  Units.inchesToMeters(12.074),
                                  Units.inchesToMeters(6.5445)),
@@ -367,8 +367,8 @@ public class Vision
     /**
      * Front Right Camera
      */
-    FRONT_RIGHT("Front Right",
-               new Rotation3d(0, Units.degreesToRadians(18), Units.degreesToRadians(30)),
+    FRONT_RIGHT("Front_Right",
+               new Rotation3d(0, Units.degreesToRadians(-18), Units.degreesToRadians(30)),
                new Translation3d(Units.inchesToMeters(13.021),
                                  Units.inchesToMeters(12.074),
                                  Units.inchesToMeters(6.5445)),
