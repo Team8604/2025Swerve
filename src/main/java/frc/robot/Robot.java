@@ -8,7 +8,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Joystick;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkFlexConfig;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+
+import com.revrobotics.spark.SparkBase.ResetMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.MathUtil;
@@ -25,6 +30,12 @@ public class Robot extends TimedRobot {
   SparkMax leftMotor = new SparkMax(10, MotorType.kBrushless);
   SparkMax rightMotor = new SparkMax(20, MotorType.kBrushless);
   SparkMax intakeMotor = new SparkMax(30, MotorType.kBrushless);
+
+  private final SparkFlex tiltMasterMotor = new SparkFlex(53, MotorType.kBrushless);
+  private final SparkFlex tiltSlaveMotor = new SparkFlex(54, MotorType.kBrushless);
+
+  private SparkFlexConfig motorConfig = new SparkFlexConfig();
+  private SparkFlexConfig slaveMotorConfig = new SparkFlexConfig();
 
   // set up analog Potentiometer
   AnalogPotentiometer potentiometer = new AnalogPotentiometer(0);
@@ -55,12 +66,21 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    // Set yp slave config
+    slaveMotorConfig.follow(53);
+
+    // Configure motors
+    tiltMasterMotor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+    tiltSlaveMotor.configure(slaveMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
   }
 
   @Override
   public void teleopPeriodic() {
 
-    leftMotor.set(Math.pow(logitechController.getRawAxis(1), 3));
+    tiltMasterMotor.set(logitechController.getRawAxis(1) * 0.1);
+
+
+    //leftMotor.set(Math.pow(logitechController.getRawAxis(1), 3));
     rightMotor.set(MathUtil.clamp(Math.pow(logitechController.getRawAxis(5), 3), -0.2, 0.2));
 
     // stopper for when coral inside of intake below
